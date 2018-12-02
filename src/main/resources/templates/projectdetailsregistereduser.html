@@ -29,11 +29,13 @@
 		<tr>
 			<th th:text="#{project.projectId}">ID</th>
 			<th th:text="#{project.projectName}">Name</th>
+			<th th:text="#{project.pledges}">Pledges</th>
 			<th th:text="#{project.projectDescription}">Description</th>
 		</tr>
 		<tr th:object="${project}">
 			<td th:text="*{projectId}">ID</td>
 			<td th:text="*{projectName}">Name</td>
+			<td th:text="#{project.pledges}"><a th:href="'/pledgelist/'+*{projectId}"></a>Pledges</th>
 			<td th:text="*{projectDescription}">Description</td>
 		</tr>
 	</table>

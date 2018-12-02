@@ -24,12 +24,12 @@
 	<table>
 		<tr>
 			<th th:text="#{projects.id}">ID</th>
-			<th th:text="#{projects.county}">County</th>
+			<th th:text="#{projects.county}">Project</th>
 		</tr>
 			
 		<tr th:each="project,iterationCount : ${projects}" th:class="${iterationCount.odd}? 'odd'" th:object="${project}"	>			
 			<td th:text="*{projectId}">1</td>
-			<td><a th:href="'/pledgestoproject/'+*{projectId}" th:text="*{projectName}">County</a></td>
+			<td><a th:href="'/pledgestoproject/'+*{projectId}" th:text="*{projectName}">Project</a></td>
 		</tr>
 	</table>
 	</main>
