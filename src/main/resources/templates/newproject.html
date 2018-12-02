@@ -17,17 +17,26 @@
 	    	<a th:if="${session.loggedin} == null" th:href="@{/login}"  id="loginbutton"><span th:text="#{index.login}"></span></a>
 	    </nav>
     </header>
+    
     <main>
-	<form id="newCountyForm" method="post" th:action="@{/newcounty}" th:object="${county}">
-		<label for="countyName" th:text="#{newcounty.countyName}" ></label>
-		<input type="text" th:field="*{countyName}"/>
-		<span th:if="${#fields.hasErrors('countyName')}" th:errors="*{countyName}" >Error</span> 
-		<br>
-		<input type="submit" th:value="#{newcounty.addCounty}"/>
-	</form>
+		<form id="newProjectForm" method="post" th:action="@{/newproject}" th:object="${project}">
+			<label for="projectName" th:text="#{newproject.projectName}"></label>
+			<input type="text" th:field="*{projectName}"/>
+			<span th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}" >Error</span> 
+			
+			<label for="projectDescription" th:text="#{newproject.projectDescription}"></label>
+			<input type="text" th:field="*{projectDescription}"/>
+			
+			<label for="projectDescription" th:text="#{newproject.projectTargetPledge}"></label>
+			<input type="number" th:field="*{projectTargetPledge}"/>
+			<span th:if="${#fields.hasErrors('projectTargetPledge')}" th:errors="*{projectT}" >Error</span> 
+			<br>
+			<input type="submit" th:value="#{newproject.addProject}"/>
+		</form>
 	
-	<h3 class="error" th:if="${duplicate}" th:text="#{newcounty.duplicate}">Error</h3>
+		<h3 class="error" th:if="${duplicate}" th:text="#{newcounty.duplicate}">Error</h3>
 	</main>
+	
 	<footer>
 		<a th:href="@{/newcounty} + '?lang=fr'"><i class="flag-icon flag-icon-fr"></i></a>
 		<a th:href="@{/newcounty} + '?lang=ie'"><i class="flag-icon flag-icon-ie"></i></a>
