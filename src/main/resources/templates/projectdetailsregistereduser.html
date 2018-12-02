@@ -27,10 +27,10 @@
 	
 	<table>
 		<tr>
-			<th th:text="#{project.projectId}">ID</th>
-			<th th:text="#{project.projectName}">Name</th>
-			<th th:text="#{project.pledges}">Pledges</th>
-			<th th:text="#{project.projectDescription}">Description</th>
+			<th th:text="#{projects.projectId}">ID</th>
+			<th th:text="#{projects.projectName}">Name</th>
+			<th th:text="#{projects.pledges}">Pledges</th>
+			<th th:text="#{projects.projectDescription}">Description</th>
 		</tr>
 		<tr th:object="${project}">
 			<td th:text="*{projectId}">ID</td>

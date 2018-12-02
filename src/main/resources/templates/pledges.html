@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css" />
-	<link rel="stylesheet" th:href="@{/css/flag-icon.css}" type="text/css">
-	<title>Welcome</title>
-	<meta charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/styles.css}"	type="text/css" />
+<link rel="stylesheet" th:href="@{/css/flag-icon.css}"	type="text/css" />
+<title>Welcome</title>
+<meta charset="utf-8" />
 </head>
 
 <body>
-
 	<header>
 		<h1><span th:text="#{index.welcome}">WELCOME</span></h1>
 	    <nav>
@@ -20,28 +19,22 @@
 	    	<a th:if="${session.loggedin} == null" th:href="@{/login}"  id="loginbutton"><span th:text="#{index.login}"></span></a>
 	    </nav>
     </header>
-
-<main>
-
-	<!-- This is the View for UNREGISTERED USERS when they click on a project -->
-	
+    
+    <main>
 	<table>
 		<tr>
-			<th th:text="#{projects.projectId}">ID</th>
-			<th th:text="#{projects.projectName}">Name</th>
-			<th th:text="#{projects.projectDescription}">Description</th>
+			<th th:text="#{projects.id}">ID</th>
+			<th th:text="#{projects.county}">Project</th>
 		</tr>
-		<tr th:object="${project}">
-			<td th:text="*{projectId}">ID</td>
-			<td th:text="*{projectName}">Name</td>
-			<td th:text="*{projectDescription}">Description</td>
+			
+		<tr th:each="pledge,iterationCount : ${pledges}" th:class="${iterationCount.odd}? 'odd'" th:object="${pledge}"	>			
+			<td th:text="*{member.memberName}">Member</td>
 		</tr>
 	</table>
-</main>
+	</main>
 	<footer>
-    		<a th:href="@{towns?lang=fr}"><i class="flag-icon flag-icon-fr"></i></a>&nbsp;
-    		<a th:href="@{towns?lang=ie}"><i class="flag-icon flag-icon-ie"></i></a>
+			<a th:href="@{/projects}+'?lang=fr'"><i class="flag-icon flag-icon-fr"></i></a>
+    		<a th:href="@{/projects}+'?lang=ie'"><i class="flag-icon flag-icon-ie"></i></a>
 	</footer>
-
 </body>
 </html>
