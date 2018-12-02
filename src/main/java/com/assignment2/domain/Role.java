@@ -6,12 +6,12 @@ import javax.persistence.Id;
 
 @Entity
 public class Role {
-
-	@Id
-	private String memberEmail;
 	
-	@Column(nullable=false)
+	@Id
 	private String type;
+
+	@Column(nullable=false)
+	private String memberEmail;
 
 	public Role(String memberEmail, String type) {
 		super();
