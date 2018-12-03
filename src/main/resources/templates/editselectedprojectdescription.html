@@ -21,12 +21,33 @@
     </header>
     
     <main>
-		<label for="project" th:text="#{project.chooseProjectToEdit}"></label>
-		<select th:field="*{project}">
-			<option  th:each="project: ${projects}" th:text="${project.projectName}" th:value="${project.projectId}"/>
-		</select>
-		<br>
-		<input type="submit" th:value="#{editproject.editDescription}"/>
+		<table>
+			<tr>
+				<th th:text="#{projects.projectId}">ID</th>
+				<th th:text="#{projects.projectName}">Name</th>
+				<th th:text="#{projects.pledges}">Pledges</th>
+				<th th:text="#{projects.projectDescription}">Description</th>
+			</tr>
+			<tr th:object="${project}">
+				<td th:text="*{projectId}">ID</td>
+				<td th:text="*{projectName}">Name</td>
+				<td th:text="*{targetPledges}"></a>Target Pledges</th>
+				<td th:text="*{currentPledges}"></a>Current Pledges</th>
+				<td th:text="*{projectDescription}">Description</td>
+			</tr>
+		</table>
+	
+		<form id="newProjectForm" method="post" th:action="@{/newproject}" th:object="${project}">
+			<label for="projectName" th:text="#{newproject.projectName}"></label>
+			<input type="text" th:field="*{projectName}"/>
+			<span th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}" >Error</span> 
+			
+			<label for="projectDescription" th:text="#{newproject.projectDescription}"></label>
+			<input type="text" th:field="*{projectDescription}"/>
+
+			<br>
+			<input type="submit" th:value="#{newproject.addProject}"/>
+		</form>
 	</main>
 	
 	<footer>
