@@ -46,7 +46,7 @@ public class Project {
 	}
 	
 	public Project() {
-		
+		this.dateCreated = LocalDate.now();
 	}
 
 	public int getProjectId() {
