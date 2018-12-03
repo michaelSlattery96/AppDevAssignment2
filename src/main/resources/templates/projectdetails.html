@@ -32,7 +32,9 @@
 			<th th:text="#{projects.projectDescription}">Description</th>
 		</tr>
 		<tr th:object="${project}">
-			
+			<td th:text="*{projectId}">ID</td>
+			<td th:text="*{projectName}">Name</td>
+			<td th:text="*{projectDescription}">Description</td>
 		</tr>
 	</table>
 </main>
