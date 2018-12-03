@@ -22,23 +22,20 @@
     </header>
 
 <main>
-
-	<!-- This is the View for REGISTERED USERS when they click on a project -->
-	
-	<table>
-		<tr>
-			<th th:text="#{projects.projectId}">ID</th>
-			<th th:text="#{projects.projectName}">Name</th>
-			<th th:text="#{projects.pledges}">Pledges</th>
-			<th th:text="#{projects.projectDescription}">Description</th>
-		</tr>
-		<tr th:object="${project}">
-			<td th:text="*{projectId}">ID</td>
-			<td th:text="*{projectName}">Name</td>
-			<td th:text="#{project.pledges}"><a th:href="'/pledges/'+*{projectId}"></a>Pledges</th>
-			<td th:text="*{projectDescription}">Description</td>
-		</tr>
-	</table>
+	<div class="login-page">
+		<div class="form">
+			<div class="error" th:if="${param.error}">Invalid username and password.</div>
+			<div class="error" th:if="${param.logout}">You have been logged out.</div>
+			<form class="login-form" method="post" th:action="@{/login}">
+				<label>
+					Email : <input type="email" name="email" /></label> 
+				<label>
+					Password: <input type="password" name="password" />
+				</label> 
+				<input type="submit" value="Sign In" />
+			</form>
+		</div>
+	</div>
 </main>
 	<footer>
     		<a th:href="@{towns?lang=fr}"><i class="flag-icon flag-icon-fr"></i></a>&nbsp;

@@ -23,19 +23,17 @@
 
 <main>
 
-	<!-- This is the View for REGISTERED USERS when they click on a project -->
+	<!-- This is the View for when a project is added successfully -->
 	
 	<table>
 		<tr>
 			<th th:text="#{projects.projectId}">ID</th>
 			<th th:text="#{projects.projectName}">Name</th>
-			<th th:text="#{projects.pledges}">Pledges</th>
 			<th th:text="#{projects.projectDescription}">Description</th>
 		</tr>
 		<tr th:object="${project}">
 			<td th:text="*{projectId}">ID</td>
 			<td th:text="*{projectName}">Name</td>
-			<td th:text="#{project.pledges}"><a th:href="'/pledges/'+*{projectId}"></a>Pledges</th>
 			<td th:text="*{projectDescription}">Description</td>
 		</tr>
 	</table>
