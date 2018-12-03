@@ -21,6 +21,7 @@
     </header>
     
     <main>
+    	<label for="projectDescription" th:text="#{editproject.successfulEdit}"></label>
 		<table>
 			<tr>
 				<th th:text="#{projects.projectId}">ID</th>
@@ -36,13 +37,7 @@
 				<td th:text="*{projectDescription}">Description</td>
 			</tr>
 		</table>
-	
-		<form id="editProjectDescriptionForm" method="post" th:action="@{/editsuccessful}" th:object="${project}">			
-			<label for="projectDescription" th:text="#{editproject.projectDescription}"></label>
-			<input type="text" th:field="*{projectDescription}"/>
-			<br>
-			<input type="submit" th:value="#{editProject.edit}"/>
-		</form>
+		<a th:href="@{/profile}" th:text="#{index.profile}"></a>
 	</main>
 	
 	<footer>
