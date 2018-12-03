@@ -23,12 +23,13 @@
     <main>
 	<table>
 		<tr>
-			<th th:text="#{projects.id}">ID</th>
-			<th th:text="#{projects.county}">Project</th>
+			<th th:text="#{member.memberId}">ID</th>
+			<th th:text="#{member.memberName}">Name</th>
 		</tr>
 			
-		<tr th:each="pledge,iterationCount : ${pledges}" th:class="${iterationCount.odd}? 'odd'" th:object="${pledge}"	>			
-			<td th:text="*{member.memberName}">Member</td>
+		<tr th:each="pledge,iterationCount : ${pledges}" th:class="${iterationCount.odd}? 'odd'" th:object="${pledge}"	>	
+			<td th:text="*{member.memberId}">Member Id</td>		
+			<td th:text="*{member.memberName}">Member Name</td>
 		</tr>
 	</table>
 	</main>

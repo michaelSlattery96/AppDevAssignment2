@@ -24,16 +24,17 @@
     	<label for="projectDescription" th:text="#{editproject.successfulEdit}"></label>
 		<table>
 			<tr>
-				<th th:text="#{projects.projectId}">ID</th>
-				<th th:text="#{projects.projectName}">Name</th>
-				<th th:text="#{projects.pledges}">Pledges</th>
-				<th th:text="#{projects.projectDescription}">Description</th>
+				<th th:text="#{project.projectId}">ID</th>
+				<th th:text="#{project.projectName}">Name</th>
+				<th th:text="#{project.targetAmount}">Target Pledges</th>
+				<th th:text="#{project.currentAmount}">Current Pledges</th>
+				<th th:text="#{project.projectDescription}">Description</th>
 			</tr>
 			<tr th:object="${project}">
 				<td th:text="*{projectId}">ID</td>
 				<td th:text="*{projectName}">Name</td>
-				<td th:text="*{targetPledges}"></a>Target Pledges</th>
-				<td th:text="*{currentPledges}"></a>Current Pledges</th>
+				<td th:text="*{targetAmount}"></a>Target Pledges</th>
+				<td th:text="*{currentAmount}"></a>Current Pledges</th>
 				<td th:text="*{projectDescription}">Description</td>
 			</tr>
 		</table>

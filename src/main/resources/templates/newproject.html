@@ -31,7 +31,8 @@
 			<label for="projectDescription" th:text="#{newproject.projectDescription}"></label>
 			<input type="text" th:field="*{projectDescription}"/>
 			
-			<label for="projectTarget" th:text="#{newproject.targetAmount}"></label>
+			<label for="projectTargetAmount" th:text="#{newproject.projectTargetAmount}"></label>
+
 			<input type="number" th:field="*{targetAmount}"/>
 			<br>
 			<input type="submit" th:value="#{newproject.addProject}"/>
