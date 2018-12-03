@@ -26,7 +26,7 @@ public class ProjectController {
 		return "projects";
 	}
 	
-	@GetMapping("/showproject/{id}")
+	@GetMapping("/projectdetails/{id}")
 	public String showAProject(@PathVariable(name="id") int id, Model model, Locale locale) {
 		
 		Project project = projectDao.findById(id).get();
