@@ -1,13 +1,19 @@
-package com.assignment2.domain;
+package com.example.demo.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Member {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int memberId;
+	
+	@Column(nullable=false)
 	private String memberEmail;
 	
 	@Column(nullable=false)
@@ -25,6 +31,10 @@ public class Member {
 	
 	public Member() {
 		
+	}
+
+	public int getMemberId() {
+		return memberId;
 	}
 
 	public String getMemberEmail() {
@@ -49,5 +59,11 @@ public class Member {
 
 	public void setMemberPassword(String memberPassword) {
 		this.memberPassword = memberPassword;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", memberEmail=" + memberEmail + ", memberName=" + memberName + ", memberPassword="
+				+ memberPassword + "]";
 	}
 }

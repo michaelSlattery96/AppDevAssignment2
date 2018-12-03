@@ -1,4 +1,4 @@
-package com.assignment2.domain;
+package com.example.demo.domain;
 
 import java.time.LocalDate;
 
@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Project {
@@ -31,18 +32,17 @@ public class Project {
 	private LocalDate dateCreated;
 	
 	@Column(nullable=false)
-	private String creator;
+	private int creatorId;
 	
-	public Project(int projectId, String projectName, String projectDescription, int targetAmount, int currentAmount,
-			LocalDate dateCreated, String creator) {
+	public Project(String projectName, String projectDescription, int targetAmount, int currentAmount,
+			LocalDate dateCreated, int creatorId) {
 		super();
-		this.projectId = projectId;
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
 		this.targetAmount = targetAmount;
 		this.currentAmount = currentAmount;
 		this.dateCreated = dateCreated;
-		this.creator = creator;
+		this.creatorId = creatorId;
 	}
 	
 	public Project() {
@@ -51,10 +51,6 @@ public class Project {
 
 	public int getProjectId() {
 		return projectId;
-	}
-
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
 	}
 
 	public String getProjectName() {
@@ -97,11 +93,18 @@ public class Project {
 		this.dateCreated = dateCreated;
 	}
 
-	public String getCreator() {
-		return creator;
+	public int getCreator() {
+		return creatorId;
 	}
 
-	public void setCreator(String creator) {
-		this.creator = creator;
+	public void setCreator(int creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	@Override
+	public String toString() {
+		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectDescription="
+				+ projectDescription + ", targetAmount=" + targetAmount + ", currentAmount=" + currentAmount
+				+ ", dateCreated=" + dateCreated + ", creatorId=" + creatorId + "]";
 	}
 }

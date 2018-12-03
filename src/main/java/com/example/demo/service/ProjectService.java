@@ -1,4 +1,4 @@
-package com.assignment2.service;
+package com.example.demo.service;
 
 public interface ProjectService {
 

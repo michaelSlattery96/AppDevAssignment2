@@ -1,4 +1,4 @@
-package com.assignment2.domain;
+package com.example.demo.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,5 +37,10 @@ public class Role {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "Role [type=" + type + ", memberEmail=" + memberEmail + "]";
 	}
 }

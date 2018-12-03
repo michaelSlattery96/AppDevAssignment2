@@ -1,4 +1,4 @@
-package com.assignment2.domain;
+package com.example.demo.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,5 +52,10 @@ public class Pledge {
 
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
+	}
+
+	@Override
+	public String toString() {
+		return "Pledge [pledgeId=" + pledgeId + ", projectId=" + projectId + ", memberEmail=" + memberEmail + "]";
 	}
 }
