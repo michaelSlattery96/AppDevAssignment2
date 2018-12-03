@@ -14,7 +14,7 @@
 	    <nav>
 		   	<a th:href="@{/projects}" th:text="#{index.projects}">View all Projects</a>
 		   	<a th:href="@{/newproject}" th:text="#{index.newproject}">Add New Project</a>
-		   	<a th:if="${session.loggedin} == null" th:href="@{/login}" th:href="@{/profile}" th:text="#{index.profile}">Profile</a>
+		   	
 		   	<a th:if="${session.loggedin} != null" th:href="@{/logout}" id="loginbutton"><span th:text="#{index.logout}"></span></a>
 	    	<a th:if="${session.loggedin} == null" th:href="@{/login}"  id="loginbutton"><span th:text="#{index.login}"></span></a>
 	    </nav>
@@ -29,7 +29,7 @@
 			
 		<tr th:each="project,iterationCount : ${projects}" th:class="${iterationCount.odd}? 'odd'" th:object="${project}"	>			
 			<td th:text="*{projectId}">1</td>
-			<td><a th:href="'/projectdescription/'+*{projectId}" th:text="*{projectName}">Project</a></td>
+			<td><a th:href="'/showproject/'+*{projectId}" th:text="*{projectName}">Project</a></td>
 		</tr>
 	</table>
 	</main>

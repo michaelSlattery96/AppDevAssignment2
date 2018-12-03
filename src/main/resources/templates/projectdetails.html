@@ -15,7 +15,7 @@
 	    <nav>
 		   	<a th:href="@{/projects}" th:text="#{index.projects}">View all Projects</a>
 		   	<a th:href="@{/newproject}" th:text="#{index.newproject}">Add New Project</a>
-		   	<a th:if="${session.loggedin} == null" th:href="@{/login}" th:href="@{/profile}" th:text="#{index.profile}">Profile</a>
+		   	
 		   	<a th:if="${session.loggedin} != null" th:href="@{/logout}" id="loginbutton"><span th:text="#{index.logout}"></span></a>
 	    	<a th:if="${session.loggedin} == null" th:href="@{/login}"  id="loginbutton"><span th:text="#{index.login}"></span></a>
 	    </nav>
@@ -32,9 +32,7 @@
 			<th th:text="#{projects.projectDescription}">Description</th>
 		</tr>
 		<tr th:object="${project}">
-			<td th:text="*{projectId}">ID</td>
-			<td th:text="*{projectName}">Name</td>
-			<td th:text="*{projectDescription}">Description</td>
+			
 		</tr>
 	</table>
 </main>
