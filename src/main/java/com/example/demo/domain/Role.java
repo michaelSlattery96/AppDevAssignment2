@@ -8,10 +8,10 @@ import javax.persistence.Id;
 public class Role {
 	
 	@Id
-	private String type;
-
-	@Column(nullable=false)
 	private String memberEmail;
+	
+	@Column(nullable=false)
+	private String type;
 
 	public Role(String memberEmail, String type) {
 		super();
