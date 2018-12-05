@@ -5,6 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Member {
@@ -13,20 +17,31 @@ public class Member {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int memberId;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, unique = true)
+	@Email
 	private String memberEmail;
 	
 	@Column(nullable=false)
 	private String memberName;
 	
 	@Column(nullable=false)
+	@Size(min=8)
 	private String memberPassword;
 
-	public Member(String memberEmail, String memberName, String memberPassword) {
+	@OneToOne
+	@JoinColumn(name = "roleEmail", nullable = false)
+	private Role memberRole;
+	
+	@Column(nullable=false)
+	private Boolean memberEnabled;
+
+	public Member(String memberEmail, String memberName, String memberPassword, Role memberRole, boolean memberEnabled) {
 		super();
 		this.memberEmail = memberEmail;
 		this.memberName = memberName;
 		this.memberPassword = memberPassword;
+		this.memberRole = memberRole;
+		this.memberEnabled = memberEnabled;
 	}
 	
 	public Member() {
@@ -35,6 +50,10 @@ public class Member {
 
 	public int getMemberId() {
 		return memberId;
+	}
+	
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getMemberEmail() {
@@ -59,6 +78,22 @@ public class Member {
 
 	public void setMemberPassword(String memberPassword) {
 		this.memberPassword = memberPassword;
+	}
+	
+	public Role getMemberRole() {
+		return memberRole;
+	}
+
+	public void setMemberRole(Role memberRole) {
+		this.memberRole = memberRole;
+	}
+	
+	public Boolean getMemberEnabled() {
+		return memberEnabled;
+	}
+
+	public void setMemberEnabled(Boolean memberEnabled) {
+		this.memberEnabled = memberEnabled;
 	}
 
 	@Override
