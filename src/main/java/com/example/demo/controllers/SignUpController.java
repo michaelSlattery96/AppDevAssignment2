@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import com.example.demo.domain.Member;
 @Controller
 public class SignUpController {
 	
+	@Autowired
 	MemberDao memberDao;
 
 	@GetMapping("/signup")
@@ -29,13 +31,15 @@ public class SignUpController {
 	
 	@PostMapping("/signup")
 	public String addNewMemberSave(@Valid Member member, BindingResult binding, RedirectAttributes redirectAttributes) {
-		
+		System.out.println("binding.hasErrors() " + binding.hasErrors());
+		System.out.println("Test Hello World " + memberDao.save(member));
 		if (binding.hasErrors()) {
 			
 			return "signup";
 		}
+		System.out.println("Test Hello World " + (memberDao.save(member) != null));
 		if (memberDao.save(member) != null) {
-			
+			System.out.println("Test SignUpController " + memberDao);
 			return "redirect:index/";
 		} else {
 			

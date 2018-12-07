@@ -31,7 +31,7 @@ public class Member {
 	private String memberPassword;
 
 	@OneToOne
-	@JoinColumn(name = "roleEmail", nullable = false)
+	@JoinColumn(name = "roleEmail")
 	private Role memberRole;
 	
 	@Column(nullable=false)
@@ -47,7 +47,7 @@ public class Member {
 	}
 	
 	public Member() {
-		this.memberRole = new Role(this.memberEmail, "USER");
+		this.memberRole = new Role("test@test.com", "USER");
 		this.memberEnabled = true;
 	}
 
@@ -65,6 +65,9 @@ public class Member {
 
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
+		System.out.println("memberEmail " + memberEmail);
+		this.memberRole.setMemberEmail(memberEmail);
+		System.out.println("Test Member Role " + this.memberRole);
 	}
 
 	public String getMemberName() {
