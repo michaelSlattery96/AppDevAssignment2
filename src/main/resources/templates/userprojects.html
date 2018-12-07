@@ -30,7 +30,9 @@
 			<th th:text="#{projects.projectName}">Project</th>
 		</tr>
 			
-		<tr th:each="project,iterationCount : ${projects}" th:class="${iterationCount.odd}? 'odd'" th:object="${project}"	>			
+		<tr th:each="project,iterationCount : ${member.projects}" 
+			th:class="${iterationCount.odd}? 'odd'" 
+			th:object="${project}">			
 			<td th:text="*{projectId}">1</td>
 			<td><a th:href="'/projectdescription/'+*{projectId}" th:text="*{projectName}">Project</a></td>
 		</tr>

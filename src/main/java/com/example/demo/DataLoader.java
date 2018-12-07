@@ -47,9 +47,9 @@ public class DataLoader implements ApplicationRunner {
 		memberDao.save(member1);
 		memberDao.save(member2);
 		
-		Project project1 = new Project("Project 1", "", 50, 0, LocalDate.now(), member1.getMemberId());
-		Project project2 = new Project("Project 2", "", 100, 10, LocalDate.now(), member1.getMemberId());
-		Project project3 = new Project("Project 3", "", 150, 20, LocalDate.now(), member2.getMemberId());
+		Project project1 = new Project("Project 1", "", 50, 0, LocalDate.now(), member1);
+		Project project2 = new Project("Project 2", "", 100, 10, LocalDate.now(), member1);
+		Project project3 = new Project("Project 3", "", 150, 20, LocalDate.now(), member2);
 		
 		projectDao.save(project1);
 		projectDao.save(project2);

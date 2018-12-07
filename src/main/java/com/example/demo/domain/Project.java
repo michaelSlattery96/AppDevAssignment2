@@ -4,10 +4,16 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Project {
@@ -31,18 +37,20 @@ public class Project {
 	@Column(nullable=false)
 	private LocalDate dateCreated;
 	
-	@Column(nullable=false)
-	private int creatorId;
+	@ManyToOne( fetch=FetchType.EAGER)
+    @JoinColumn(nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+	private Member creator;
 	
 	public Project(String projectName, String projectDescription, int targetAmount, int currentAmount,
-			LocalDate dateCreated, int creatorId) {
+			LocalDate dateCreated, Member creator) {
 		super();
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
 		this.targetAmount = targetAmount;
 		this.currentAmount = currentAmount;
 		this.dateCreated = dateCreated;
-		this.creatorId = creatorId;
+		this.creator = creator;
 	}
 	
 	public Project() {
@@ -93,18 +101,18 @@ public class Project {
 		this.dateCreated = dateCreated;
 	}
 
-	public int getCreator() {
-		return creatorId;
+	public Member getCreator() {
+		return creator;
 	}
 
-	public void setCreator(int creatorId) {
-		this.creatorId = creatorId;
+	public void setCreator(Member creator) {
+		this.creator = creator;
 	}
 
 	@Override
 	public String toString() {
 		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectDescription="
 				+ projectDescription + ", targetAmount=" + targetAmount + ", currentAmount=" + currentAmount
-				+ ", dateCreated=" + dateCreated + ", creatorId=" + creatorId + "]";
+				+ ", dateCreated=" + dateCreated + ", creatorId=" + creator + "]";
 	}
 }
