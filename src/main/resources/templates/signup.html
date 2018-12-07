@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<link rel="stylesheet" th:href="@{/css/styles.css}" href="/css/styles.css" type="text/css" />
-<link rel="stylesheet" th:href="@{/css/flag-icon.css}" type="text/css" />
-<title>Welcome</title>
-<meta charset="utf-8" />
+	<link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css" />
+	<link rel="stylesheet" th:href="@{/css/flag-icon.css}" type="text/css">
+	<title>Welcome</title>
+	<meta charset="utf-8" />
 </head>
 
 <body>
-
-	<!-- This VIEW is for unregistered USERS they can REGISTER HERE -->
-	<!-- This VIEW will not render if USER is LOGGED IN -->
 
 	<header>
 		<h1><span th:text="#{index.welcome}">WELCOME</span></h1>
@@ -23,28 +21,31 @@
 	    	<a th:if="${session.loggedin} == null" th:href="@{/login}"  id="loginbutton"><span th:text="#{index.login}"></span></a>
 	    </nav>
     </header>
-    
-    	<main>
-			<div class="signup-page">
-				<div class="form">
-					<div class="error" th:if="${param.error}">Invalid username and password.</div>
-					<div class="error" th:if="${param.logout}">You have been logged out.</div>
-					<form class="login-form" method="post" th:action="@{/login}">
-						<label>
-							Email : <input type="email" name="email" />
-						</label> 
-						<label>
-							Password: <input type="password" name="password" />
-						</label> 
-						<input type="submit" value="Sign In" />
-					</form>
-				</div>
-			</div>
-		</main>
-    
+
+<main>
+	<div class="login-page">
+		<div class="form">
+			<form class="login-form" method="post" th:action="@{/login}" th:object="${member}">
+				<label>
+					Email : <input type="email" name="email" />
+				</label> 
+				<label>
+					User Name : <input type="text" name="username" />
+				</label> 
+				<label>
+					Password: <input type="password" name="password" />
+				</label> 
+				<input type="submit" value="Sign In" />
+			</form>
+			
+			<h3 class="error" th:if="${userduplicate}" th:text="#{signup.userduplicate}">Error</h3>
+		</div>
+	</div>
+</main>
 	<footer>
-			<a th:href="@{/}+'?lang=fr'"><i class="flag-icon flag-icon-fr"></i></a>
-    		<a th:href="@{/}+'?lang=ie'"><i class="flag-icon flag-icon-ie"></i></a>
+    		<a th:href="@{towns?lang=fr}"><i class="flag-icon flag-icon-fr"></i></a>&nbsp;
+    		<a th:href="@{towns?lang=ie}"><i class="flag-icon flag-icon-ie"></i></a>
 	</footer>
+
 </body>
 </html>
