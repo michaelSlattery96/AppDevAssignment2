@@ -30,7 +30,17 @@ public class SignUpController {
 	@PostMapping("/signup")
 	public String addNewMemberSave(@Valid Member member, BindingResult binding, RedirectAttributes redirectAttributes) {
 		
-		memberDao.save(member);
-		return "redirect:index/";
+		if (binding.hasErrors()) {
+			
+			return "signup";
+		}
+		if (memberDao.save(member) != null) {
+			
+			return "redirect:index/";
+		} else {
+			
+			redirectAttributes.addFlashAttribute("duplicate", true);
+			return "redirect:signup";
+		}
 	}
 }

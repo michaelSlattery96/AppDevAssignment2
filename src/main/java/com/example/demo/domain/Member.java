@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
+import com.example.demo.dao.RoleDao;
+
 @Entity
 public class Member {
 
@@ -45,7 +47,8 @@ public class Member {
 	}
 	
 	public Member() {
-		
+		this.memberRole = new Role(this.memberEmail, "USER");
+		this.memberEnabled = true;
 	}
 
 	public int getMemberId() {

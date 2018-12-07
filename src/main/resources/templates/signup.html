@@ -29,12 +29,12 @@
 				<div class="form">
 					<div class="error" th:if="${param.error}">Invalid username and password.</div>
 					<div class="error" th:if="${param.logout}">You have been logged out.</div>
-					<form class="login-form" method="post" th:action="@{/login}">
-						<label>
-							User Name: <input type="text" name="name" />
-						</label> 
+					<form class="signup-form" method="post" th:action="@{/signup}">
 						<label>
 							Email : <input type="email" name="email" />
+						</label>
+						<label>
+							User Name: <input type="text" name="name" />
 						</label> 
 						<label>
 							Password: <input type="password" name="password" />
