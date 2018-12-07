@@ -41,7 +41,7 @@ public class ProjectController {
 			return "notFoundError";
 		}
 		model.addAttribute("project", project);
-		return "project";
+		return "projectdetails";
 	}
 	
 	@GetMapping("/newproject")
@@ -54,7 +54,8 @@ public class ProjectController {
 	
 	@PostMapping("/newproject")
 	public String addNewProjectSave(@Valid Project project, BindingResult binding, RedirectAttributes redirectAttributes) {
+		
 		projectDao.save(project);
-		return "redirect:projectdetails/"+project.getProjectId();
+		return "redirect:projects/";
 	}
 }

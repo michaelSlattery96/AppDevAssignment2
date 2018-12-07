@@ -31,12 +31,15 @@
 					<div class="error" th:if="${param.logout}">You have been logged out.</div>
 					<form class="login-form" method="post" th:action="@{/login}">
 						<label>
+							User Name: <input type="text" name="name" />
+						</label> 
+						<label>
 							Email : <input type="email" name="email" />
 						</label> 
 						<label>
 							Password: <input type="password" name="password" />
 						</label> 
-						<input type="submit" value="Sign In" />
+						<input type="submit" value="Sign Up" />
 					</form>
 				</div>
 			</div>

@@ -16,6 +16,12 @@ public class LoginController {
 		return "login";
 	}
 	
+	@GetMapping(value = "/403")
+	public String preventAccess(Locale locale) 
+	{
+		return "403";
+	}
+	
 	@GetMapping(value="/logout")
 	public String register(HttpSession session)
 	{

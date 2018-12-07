@@ -14,9 +14,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.authorizeRequests().antMatchers("/**").permitAll()
+			.authorizeRequests().antMatchers("/css/**", "/", "/projects", "/projectdetails/**").permitAll()
+			.antMatchers("/newproject/").hasAnyRole("USER", "ADMIN")
+			.anyRequest().authenticated()
 			.and()
-			.formLogin().loginPage("/login")
+			.formLogin().loginPage("/login").permitAll()
 			.usernameParameter("email")
 			.and()
 			.httpBasic();
