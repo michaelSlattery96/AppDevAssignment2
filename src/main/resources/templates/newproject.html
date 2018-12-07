@@ -7,21 +7,24 @@
 	<meta charset="utf-8" />
 </head>
 
+	<!-- This VIEW is to add new PROJECTS -->
+	<!-- Once a PROJECT has been added SUCCESSFULLY then it redirects to projects.html -->
+	<!-- UNREGISTERED USERS cannot add new projects, so they'll be redirected to Login.html-->
+
 <body>
 	<header>
 		<h1><span th:text="#{index.welcome}">WELCOME</span></h1>
 	    <nav>
 		   	<a th:href="@{/projects}" th:text="#{index.projects}">View all Projects</a>
-		   	<a th:href="@{/newproject}" th:text="#{index.newproject}">Add New Project</a>
-		    
+		   	<a th:if="${session.loggedin} != null" th:href="@{/newproject}" th:text="#{index.newproject}">Add New Project</a>
+		    <a th:if="${session.loggedin} == null" th:href="@{/signup}" th:text="#{index.signup}">Sign Up</a>
+			<a th:if="${session.loggedin} != null" th:href="@{/profile}" th:text="#{index.profile}">Profile</a>
 		   	<a th:if="${session.loggedin} != null" th:href="@{/logout}" id="loginbutton"><span th:text="#{index.logout}"></span></a>
 	    	<a th:if="${session.loggedin} == null" th:href="@{/login}"  id="loginbutton"><span th:text="#{index.login}"></span></a>
 	    </nav>
     </header>
     
     <main>
-    
-    	<!-- UNREGISTERED USERS cannot add new projects, so they'll be redirected to Login.html-->
     	
 		<form id="newProjectForm" method="post" th:action="@{/newproject}" th:object="${project}">
 			<label for="projectName" th:text="#{newproject.projectName}"></label>
