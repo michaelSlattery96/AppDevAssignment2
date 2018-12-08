@@ -22,26 +22,27 @@
 	    </nav>
     </header>
 
-<main>
-	<div class="login-page">
-		<div class="form">
-			<form class="login-form" method="post" th:action="@{/login}" th:object="${member}">
-				<label>
-					Email : <input type="email" name="email" />
-				</label> 
-				<label>
-					User Name : <input type="text" name="username" />
-				</label> 
-				<label>
-					Password: <input type="password" name="password" />
-				</label> 
-				<input type="submit" value="Sign In" />
-			</form>
-			
-			<h3 class="error" th:if="${userduplicate}" th:text="#{signup.userduplicate}">Error</h3>
-		</div>
-	</div>
-</main>
+    	<main>
+			<div class="signup-page">
+				<div class="form">
+					<div class="error" th:if="${param.error}">Invalid username and password.</div>
+					<div class="error" th:if="${param.logout}">You have been logged out.</div>
+					<form class="signup-form" method="post" th:action="@{/signup}" th:object="${member}">
+						<label>
+							Email : <input type="email" th:field="*{memberEmail}" />
+						</label>
+						<label>
+							User Name: <input type="text" th:field="*{memberName}" />
+						</label> 
+						<label>
+							Password: <input type="password" th:field="*{memberPassword}" />
+						</label> 
+						<input type="submit" th:value="#{register.signupUser}" />
+					</form>
+				</div>
+			</div>
+		</main>
+
 	<footer>
     		<a th:href="@{towns?lang=fr}"><i class="flag-icon flag-icon-fr"></i></a>&nbsp;
     		<a th:href="@{towns?lang=ie}"><i class="flag-icon flag-icon-ie"></i></a>

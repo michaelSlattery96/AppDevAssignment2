@@ -54,6 +54,7 @@ public class ProjectController {
 	
 	@PostMapping("/newproject")
 	public String addNewProjectSave(@Valid Project project, BindingResult binding, RedirectAttributes redirectAttributes) {
+		
 		projectDao.save(project);
 		return "redirect:projects/";
 	}
