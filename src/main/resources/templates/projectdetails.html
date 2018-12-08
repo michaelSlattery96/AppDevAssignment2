@@ -42,7 +42,7 @@
 			<td th:text="*{projectId}">ID</td>
 			<td th:text="*{projectName}">Name</td>
 			<td th:text="*{targetAmount}">Target Amount</td>
-			<td th:text="*{currentAmount}" th:if="${session.loggedin} != null"><a th:href="'/pledges/'+*{projectId}">Current Amount</a></th>
+			<td th:text="*{currentAmount}" th:if="${session.loggedin} != null"><a th:href="'/pledges/'+*{projectId}">Current Amount</a></td>
 			<td th:text="*{projectDescription}">Description</td>
 		</tr>
 	</table>

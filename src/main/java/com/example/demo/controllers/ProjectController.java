@@ -95,6 +95,7 @@ public class ProjectController {
 		Member member = memberServcie.findByEmail(user.getUsername());
 		
 		project.setCreator(member);
+
 		projectDao.save(project);
 		return "redirect:projects/";
 	}

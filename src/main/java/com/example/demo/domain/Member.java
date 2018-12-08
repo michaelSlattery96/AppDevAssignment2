@@ -17,7 +17,11 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
+
+import com.example.demo.dao.RoleDao;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Member {
@@ -38,7 +42,7 @@ public class Member {
 	private String memberPassword;
 
 	@OneToOne
-	@JoinColumn(name = "roleEmail", nullable = false)
+	@JoinColumn(name = "roleEmail")
 	private Role memberRole;
 	
 	@JsonIgnore
@@ -59,7 +63,7 @@ public class Member {
 	}
 	
 	public Member() {
-		
+		super();
 	}
 
 	public int getMemberId() {
