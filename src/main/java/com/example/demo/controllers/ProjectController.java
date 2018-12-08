@@ -34,7 +34,7 @@ public class ProjectController {
 	@Autowired
 	ProjectDao projectDao;
 	
-	@GetMapping("/projects")
+	@GetMapping("/showprojects")
 	public String showProjects(Model model, Locale locale) {
 		
 		List<Project> projects = projectDao.findAll();
@@ -97,6 +97,6 @@ public class ProjectController {
 		project.setCreator(member);
 
 		projectDao.save(project);
-		return "redirect:projects/";
+		return "redirect:showprojects/";
 	}
 }
