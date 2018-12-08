@@ -25,12 +25,13 @@
     </header>
     
     <main>
-		<label for="project" th:text="#{project.chooseProjectToEdit}"></label>
-		<select th:field="*{project}">
-			<option  th:each="project: ${projects}" th:text="${project.projectName}" th:value="${project.projectId}"/>
-		</select>
-		<br>
-		<input type="submit" th:value="#{editproject.editDescription}"/>
+		<form id="editProjectDescriptionForm" th:method="put" th:action="'/projectdetails/'+*{projectId}" th:object="${project}">			
+			<label for="projectDescription" th:text="#{editproject.projectDescription}"></label>
+			<br>
+			<textarea th:field="*{projectDescription}"></textarea>
+			<br>
+			<input type="submit" th:value="#{editProject.edit}"/>
+		</form>
 	</main>
 	
 	<footer>

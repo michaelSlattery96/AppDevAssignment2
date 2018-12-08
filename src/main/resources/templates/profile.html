@@ -36,7 +36,7 @@
 				th:class="${iterationCount.odd}? 'odd'" 
 				th:object="${project}">			
 				<td th:text="*{projectId}">1</td>
-				<td><a th:href="'/projectdescription/'+*{projectId}" th:text="*{projectName}">Project</a></td>
+				<td><a th:href="'/projectdetails/'+*{projectId}" th:text="*{projectName}">Project</a></td>
 				<td><a th:href="'/editproject/'+*{projectId}" th:text="#{editproject.projectDescription}"></a></td>
 			</tr>
 		</table>
