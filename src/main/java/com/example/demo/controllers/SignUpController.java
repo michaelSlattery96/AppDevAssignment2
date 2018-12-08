@@ -6,6 +6,7 @@ import java.util.Locale;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,13 +15,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dao.MemberDao;
+import com.example.demo.dao.RoleDao;
 import com.example.demo.domain.Member;
+import com.example.demo.domain.Role;
 
 @Controller
 public class SignUpController {
 	
 	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	@Autowired
 	MemberDao memberDao;
+	
+	@Autowired
+	RoleDao roleDao;
 
 	@GetMapping("/signup")
 	public String addNewMemberForm(Model model, Locale locale) {
@@ -31,16 +40,20 @@ public class SignUpController {
 	
 	@PostMapping("/signup")
 	public String addNewMemberSave(@Valid Member member, BindingResult binding, RedirectAttributes redirectAttributes) {
-		System.out.println("binding.hasErrors() " + binding.hasErrors());
-		System.out.println("Test Hello World " + memberDao.save(member));
+		Role userRole = new Role(member.getMemberEmail(), "User");
+		
+		roleDao.save(userRole);
+		
+		member.setMemberPassword(passwordEncoder.encode(member.getMemberPassword()));
+		member.setMemberRole(userRole);
+		member.setMemberEnabled(true);
+				
 		if (binding.hasErrors()) {
 			
 			return "signup";
 		}
-		System.out.println("Test Hello World " + (memberDao.save(member) != null));
 		if (memberDao.save(member) != null) {
-			System.out.println("Test SignUpController " + memberDao);
-			return "redirect:index/";
+			return "index";
 		} else {
 			
 			redirectAttributes.addFlashAttribute("duplicate", true);

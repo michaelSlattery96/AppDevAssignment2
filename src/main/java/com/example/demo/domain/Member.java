@@ -47,8 +47,7 @@ public class Member {
 	}
 	
 	public Member() {
-		this.memberRole = new Role("test@test.com", "USER");
-		this.memberEnabled = true;
+		super();
 	}
 
 	public int getMemberId() {
@@ -65,9 +64,6 @@ public class Member {
 
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
-		System.out.println("memberEmail " + memberEmail);
-		this.memberRole.setMemberEmail(memberEmail);
-		System.out.println("Test Member Role " + this.memberRole);
 	}
 
 	public String getMemberName() {
