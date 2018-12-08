@@ -69,12 +69,14 @@ public class ProjectController {
 	}
 	
 	@Transactional
-	@PutMapping("/editsuccess/{id}")
-	public String editAProjectSave(@Valid Project project, @PathVariable(name="id") int id) {
+	@PutMapping("/projectdetails/{id}")
+	public String editAProjectSave(@Valid Project project, @PathVariable(name="id") int id, Model model, Locale locale) {
 		
 		projectDao.updateProjectDescription(project.getProjectDescription(), id);
 		
-		return "projectdetails/"+id;
+		model.addAttribute("project", projectDao.findById(id).get());
+		
+		return "projectdetails";
 	}
 	
 	@GetMapping("/newproject")

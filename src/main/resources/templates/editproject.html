@@ -25,7 +25,7 @@
     </header>
     
     <main>
-		<form id="editProjectDescriptionForm" th:method="put" th:action="'/editsuccess/'+*{projectId}" th:object="${project}">			
+		<form id="editProjectDescriptionForm" th:method="put" th:action="'/projectdetails/'+*{projectId}" th:object="${project}">			
 			<label for="projectDescription" th:text="#{editproject.projectDescription}"></label>
 			<br>
 			<textarea th:field="*{projectDescription}"></textarea>
