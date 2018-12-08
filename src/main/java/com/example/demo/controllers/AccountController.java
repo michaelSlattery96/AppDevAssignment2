@@ -9,15 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import com.example.demo.service.MemberService;
 import com.example.demo.dao.ProjectDao;
 import com.example.demo.domain.Member;
+import com.example.demo.service.MemberService;
 
 @Controller
-public class ProfileController {
-	
+public class AccountController {
+
 	@Autowired
 	MemberService memberServcie;
 	
