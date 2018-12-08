@@ -8,5 +8,6 @@ import com.example.demo.domain.Project;
 public interface MemberService {
 	
 	Member findById(int id);
+	Member findByEmail(String email);
 	List<Project> findMembersWithProjects(String projectName);
 }

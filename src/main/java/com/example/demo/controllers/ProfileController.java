@@ -3,6 +3,9 @@ package com.example.demo.controllers;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +25,20 @@ public class ProfileController {
 	ProjectDao projectDao;
 	
 	@GetMapping("/profile")
-	public String showProjectsInProfile(@PathVariable(name="id") int id, Model model, Locale locale) {
+	public String showProjectsInProfile(Model model, Locale locale) {
 		
-		Member member = memberServcie.findById(id);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails user = (UserDetails) auth.getPrincipal();
+		
+		Member member = memberServcie.findByEmail(user.getUsername());
+		
 		if (member == null) {
 			
-			model.addAttribute("id", id);
 			return "403";
 		}
 		
-		model.addAttribute("member", member);
+		model.addAttribute("memberId", member.getMemberId());
 		
 		return "profile";
 	}
@@ -39,14 +46,19 @@ public class ProfileController {
 	@GetMapping("/userprojects/{id}")
 	public String showUserProjects(@PathVariable(name="id") int id, Model model, Locale locale) {
 		
-		Member member = memberServcie.findById(id);
-		if (member == null) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		UserDetails user = (UserDetails) auth.getPrincipal();
+		
+		Member member = memberServcie.findByEmail(user.getUsername());
+		
+		if (member == null || member.getMemberId() != id) {
 			
 			model.addAttribute("id", id);
 			return "403";
 		}
 		
-		model.addAttribute("memberId", member.getMemberId());
+		model.addAttribute("member", member);
 		
 		return "userprojects";
 	}

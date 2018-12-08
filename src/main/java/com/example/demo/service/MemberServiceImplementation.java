@@ -20,6 +20,12 @@ public class MemberServiceImplementation implements MemberService {
 		
 		return memberDao.findById(id).get();
 	}
+	
+	@Override
+	public Member findByEmail(String email) {
+		
+		return memberDao.findByEmail(email);
+	}
 
 	@Override
 	public List<Project> findMembersWithProjects(String projectName) {

@@ -24,7 +24,7 @@
     </header>
     
     <main>
-		<a th:href="'/userprojects/'+*{member.memberId}" th:text="#{profile.ownprojects}">View Projects</a>
+		<a th:href="'/userprojects/'+*{memberId}" th:text="#{profile.ownprojects}">View Projects</a>
 		<a th:href="@{/editproject}" th:text="#{profile.editprojects}">Edit Project</a>
 	</main>
 	
