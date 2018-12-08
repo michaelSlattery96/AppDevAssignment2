@@ -32,4 +32,12 @@ public class MemberServiceImplementation implements MemberService {
 		
 		return memberDao.findMembersWithProjects(projectName);
 	}
+	
+	public Member save(Member member) {
+		if ( memberDao.existsByMemberEmail(member.getMemberEmail())) {
+			return null;
+		}
+		
+		return memberDao.save(member);
+	}
 }

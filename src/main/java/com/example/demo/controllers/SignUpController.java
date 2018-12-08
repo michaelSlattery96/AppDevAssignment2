@@ -18,6 +18,7 @@ import com.example.demo.dao.MemberDao;
 import com.example.demo.dao.RoleDao;
 import com.example.demo.domain.Member;
 import com.example.demo.domain.Role;
+import com.example.demo.service.MemberService;
 
 @Controller
 public class SignUpController {
@@ -30,6 +31,9 @@ public class SignUpController {
 	
 	@Autowired
 	RoleDao roleDao;
+	
+	@Autowired
+	MemberService memberService;
 
 	@GetMapping("/signup")
 	public String addNewMemberForm(Model model, Locale locale) {
@@ -52,7 +56,7 @@ public class SignUpController {
 			
 			return "signup";
 		}
-		if (memberDao.save(member) != null) {
+		if (memberService.save(member) != null) {
 			return "index";
 		} else {
 			

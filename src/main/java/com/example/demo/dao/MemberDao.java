@@ -10,6 +10,8 @@ import com.example.demo.domain.Member;
 import com.example.demo.domain.Project;
 
 public interface MemberDao extends JpaRepository<Member, Integer> {
+	
+	boolean existsByMemberEmail(String memberEmail);
 
 	@Query("SELECT m FROM Member m WHERE m.memberEmail=:memberEmail")
 	Member findByEmail(@Param("memberEmail") String memberEmail);
