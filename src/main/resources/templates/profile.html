@@ -12,7 +12,6 @@
 
 <body>
 	<header>
-		<h1><span th:text="#{index.welcome}">WELCOME</span></h1>
 	    <nav>
 		   	<a th:href="@{/projects}" th:text="#{index.projects}">View all Projects</a>
 		   	<a th:if="${session.loggedin} != null" th:href="@{/newproject}" th:text="#{index.newproject}">Add New Project</a>
@@ -24,8 +23,23 @@
     </header>
     
     <main>
-		<a th:href="'/userprojects/'+*{memberId}" th:text="#{profile.ownprojects}">View Projects</a>
-		<a th:href="@{/editproject}" th:text="#{profile.editprojects}">Edit Project</a>
+    	<h1>Hi <span th:text="${member.memberName}">Name</span></h1>
+		<h1>Your Projects</h1>
+		<table>
+			<tr>
+				<th th:text="#{projects.Id}">ID</th>
+				<th th:text="#{projects.projectName}">Project</th>
+				<th th:text="#{project.chooseProjectToEdit}">Edit</th>
+			</tr>
+				
+			<tr th:each="project,iterationCount : ${member.projects}" 
+				th:class="${iterationCount.odd}? 'odd'" 
+				th:object="${project}">			
+				<td th:text="*{projectId}">1</td>
+				<td><a th:href="'/projectdescription/'+*{projectId}" th:text="*{projectName}">Project</a></td>
+				<td><a th:href="'/editproject/'+*{projectId}" th:text="#{editproject.projectDescription}"></a></td>
+			</tr>
+		</table>
 	</main>
 	
 	<footer>

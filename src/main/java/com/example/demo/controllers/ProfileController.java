@@ -28,9 +28,7 @@ public class ProfileController {
 	public String showProjectsInProfile(Model model, Locale locale) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
 		UserDetails user = (UserDetails) auth.getPrincipal();
-		
 		Member member = memberServcie.findByEmail(user.getUsername());
 		
 		if (member == null) {
@@ -38,7 +36,7 @@ public class ProfileController {
 			return "403";
 		}
 		
-		model.addAttribute("memberId", member.getMemberId());
+		model.addAttribute("member", member);
 		
 		return "profile";
 	}
@@ -47,9 +45,7 @@ public class ProfileController {
 	public String showUserProjects(@PathVariable(name="id") int id, Model model, Locale locale) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
 		UserDetails user = (UserDetails) auth.getPrincipal();
-		
 		Member member = memberServcie.findByEmail(user.getUsername());
 		
 		if (member == null || member.getMemberId() != id) {
