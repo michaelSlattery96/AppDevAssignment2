@@ -68,6 +68,29 @@ public class ProjectController {
 		return "editproject";
 	}
 	
+	@GetMapping("/pledge/{id}")
+	public String editCurrentPledge(@PathVariable(name="id") int id, Model model, Locale locale) {
+		Project project = projectDao.findById(id).get();
+		if (project == null) {
+			
+			model.addAttribute("id", id);
+			return "notFoundError";
+		}
+		model.addAttribute("project", project);
+		return "pledge";
+	}
+	
+	@Transactional
+	@PutMapping("/pledge/{id}")
+	public String editCurrentPledgeSave(@Valid Project project, @PathVariable(name="id") int id, Model model, Locale locale) {
+		
+		projectDao.updateProjectCurrentAmount(project.getCurrentAmount(), id);
+		
+		model.addAttribute("project", projectDao.findById(id).get());
+		
+		return "projectdetails";
+	}
+	
 	@Transactional
 	@PutMapping("/projectdetails/{id}")
 	public String editAProjectSave(@Valid Project project, @PathVariable(name="id") int id, Model model, Locale locale) {
