@@ -1,14 +1,23 @@
 package com.example.demo.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Member {
@@ -32,10 +41,15 @@ public class Member {
 	@JoinColumn(name = "roleEmail", nullable = false)
 	private Role memberRole;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="creator", fetch=FetchType.EAGER, cascade= CascadeType.ALL)
+	private List<Project> projects = new ArrayList<Project>();
+	
 	@Column(nullable=false)
 	private Boolean memberEnabled;
 
-	public Member(String memberEmail, String memberName, String memberPassword, Role memberRole, boolean memberEnabled) {
+	public Member(String memberEmail, String memberName, String memberPassword, Role memberRole, 
+			boolean memberEnabled) {
 		super();
 		this.memberEmail = memberEmail;
 		this.memberName = memberName;
@@ -94,6 +108,14 @@ public class Member {
 
 	public void setMemberEnabled(Boolean memberEnabled) {
 		this.memberEnabled = memberEnabled;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 	@Override

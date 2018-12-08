@@ -15,6 +15,7 @@ public class CreateLoginSessionVariable implements ApplicationListener<Authentic
 
 	@Override
 	public void onApplicationEvent(AuthenticationSuccessEvent event) {
+		
 		session.setAttribute("loggedin", true);
 	}
 
