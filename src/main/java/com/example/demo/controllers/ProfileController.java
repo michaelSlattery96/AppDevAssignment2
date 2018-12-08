@@ -40,23 +40,4 @@ public class ProfileController {
 		
 		return "profile";
 	}
-	
-	@GetMapping("/userprojects/{id}")
-	public String showUserProjects(@PathVariable(name="id") int id, Model model, Locale locale) {
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails user = (UserDetails) auth.getPrincipal();
-		Member member = memberServcie.findByEmail(user.getUsername());
-		
-		if (member == null || member.getMemberId() != id) {
-			
-			model.addAttribute("id", id);
-			return "403";
-		}
-		
-		model.addAttribute("member", member);
-		
-		return "userprojects";
-	}
-	
 }
