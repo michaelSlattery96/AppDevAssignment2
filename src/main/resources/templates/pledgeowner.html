@@ -16,7 +16,7 @@
 	<header>
 		<h1><span th:text="#{index.welcome}">WELCOME</span></h1>
 	    <nav>
-		   	<a th:href="@{/projects}" th:text="#{index.projects}">View all Projects</a>
+		   	<a th:href="@{/showprojects}" th:text="#{index.projects}">View all Projects</a>
 		   	<a th:if="${session.loggedin} != null" th:href="@{/newproject}" th:text="#{index.newproject}">Add New Project</a>
 		   	<a th:if="${session.loggedin} == null" th:href="@{/signup}" th:text="#{index.signup}">Sign Up</a>
 			<a th:if="${session.loggedin} != null" th:href="@{/profile}" th:text="#{index.profile}">Profile</a>
@@ -33,9 +33,9 @@
 			<th th:text="#{pledge.pledgeName}">Name</th>
 		</tr>
 			
-		<tr th:each="project,iterationCount : ${projects}" th:class="${iterationCount.odd}? 'odd'" th:object="${project}"	>	
-			<td th:text="*{pledge.pledgeId}">Member Id</td>		
-			<td th:text="*{pledge.memberEmail}">Member Name</td>
+		<tr th:each="pledge,iterationCount : ${pledges}" th:class="${iterationCount.odd}? 'odd'" th:object="${pledge}"	>	
+			<td th:text="*{member.memberId}">Member Id</td>		
+			<td th:text="*{member.memberName}">Member Name</td>
 		</tr>
 	</table>
 	

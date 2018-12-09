@@ -16,7 +16,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests().antMatchers("/css/**", "/", "/showprojects", "/projects", "/projectdetails/**",
 				"/signup").permitAll()
-			.antMatchers("/newproject/", "/profile/", "/editproject/", "/userprojects/").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/newproject/", "/profile/", "/editproject/", "/userprojects/", 
+					"/pledgenotowner/", "/pledgeowner/").hasAnyRole("USER", "ADMIN")
 			.and()
 			.formLogin().loginPage("/login").permitAll()
 			.usernameParameter("email")
