@@ -26,13 +26,19 @@
     </header>
 
 <main>
-	<form id="makeAPledgeForm" th:method="put" th:action="'/pledge/'+*{projectId}" th:object="${project}">			
-		<label for="makePledge" th:text="#{pledge.makeAPledge}"></label>
-		<br>
-		<input type="number" th:field="*{currentAmount}"/>
-		<br>
-		<input type="submit" th:value="#{pledge.addPledge}"/>
-	</form>
+
+	<table>
+		<tr>
+			<th th:text="#{pledge.pledgeId}">ID</th>
+			<th th:text="#{pledge.pledgeName}">Name</th>
+		</tr>
+			
+		<tr th:each="project,iterationCount : ${projects}" th:class="${iterationCount.odd}? 'odd'" th:object="${project}"	>	
+			<td th:text="*{pledge.pledgeId}">Member Id</td>		
+			<td th:text="*{pledge.memberEmail}">Member Name</td>
+		</tr>
+	</table>
+	
 </main>
 	<footer>
    		<a th:href="@{projectdetails?lang=fr}"><i class="flag-icon flag-icon-fr"></i></a>&nbsp;

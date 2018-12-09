@@ -2,9 +2,15 @@ package com.example.demo.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Pledge {
@@ -13,21 +19,24 @@ public class Pledge {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int pledgeId;
 	
-	@Column(nullable=false)
-	private int projectId;
+	@ManyToOne( fetch=FetchType.EAGER)
+    @JoinColumn(nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+	private Project project;
 	
-	@Column(nullable=false)
-	private String memberEmail;
+	@ManyToOne( fetch=FetchType.LAZY)
+	@JoinColumn(nullable = false)
+	private Member member;
 
 	public int getPledgeId() {
 		return pledgeId;
 	}
 	
-	public Pledge(int pledgeId, int projectId, String memberEmail) {
+	public Pledge(int pledgeId, Project project, Member member) {
 		super();
 		this.pledgeId = pledgeId;
-		this.projectId = projectId;
-		this.memberEmail = memberEmail;
+		this.project = project;
+		this.member = member;
 	}
 	
 	public Pledge() {
@@ -38,24 +47,24 @@ public class Pledge {
 		this.pledgeId = pledgeId;
 	}
 
-	public int getProjectId() {
-		return projectId;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
-	public String getMemberEmail() {
-		return memberEmail;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberEmail(String memberEmail) {
-		this.memberEmail = memberEmail;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	@Override
 	public String toString() {
-		return "Pledge [pledgeId=" + pledgeId + ", projectId=" + projectId + ", memberEmail=" + memberEmail + "]";
+		return "Pledge [pledgeId=" + pledgeId + ", project=" + project + ", member=" + member + "]";
 	}
 }
