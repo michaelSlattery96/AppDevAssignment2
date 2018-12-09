@@ -16,12 +16,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests().antMatchers("/css/**", "/", "/showprojects", "/projects", "/projectdetails/**",
 				"/signup").permitAll()
-			.antMatchers("/newproject/", "/profile/").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/newproject/", "/profile/", "/editproject/", "/userprojects/").hasAnyRole("USER", "ADMIN")
 			.and()
 			.formLogin().loginPage("/login").permitAll()
 			.usernameParameter("email")
 			.and()
-			.httpBasic();
+			.httpBasic()
+			.and()
+			.exceptionHandling().accessDeniedPage("/403");
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}

@@ -25,19 +25,21 @@
     	<main>
 			<div class="signup-page">
 				<div class="form">
-					<div class="error" th:if="${param.error}">Invalid username and password.</div>
-					<div class="error" th:if="${param.logout}">You have been logged out.</div>
+					<div class="error" th:text="#{login.invalid}" th:if="${param.error}">Invalid username and password.</div>
 					<form class="signup-form" method="post" th:action="@{/signup}" th:object="${member}">
-						<label>
-							Email : <input type="email" th:field="*{memberEmail}" />
+						<label th:text="#{signup.email}">
+							Email : 
 						</label>
-						<label>
-							User Name: <input type="text" th:field="*{memberName}" />
+						<input type="email" th:field="*{memberEmail}" />
+						<label th:text="#{signup.username}">
+							User Name: 
 						</label>
+						<input type="text" th:field="*{memberName}" />
 						<span  th:if="${#fields.hasErrors('memberName')}" class="error" th:errors="*{memberName}">Error</span>
-						<label>
-							Password: <input type="password" th:field="*{memberPassword}" />
+						<label th:text="#{signup.password}">
+							Password: 
 						</label> 
+						<input type="password" th:field="*{memberPassword}" >
 						<span  th:if="${#fields.hasErrors('memberPassword')}" class="error" th:errors="*{memberPassword}">Error</span>
 						<input type="submit" th:value="#{register.signupUser}" />
 					</form>
