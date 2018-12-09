@@ -41,6 +41,7 @@ public class Member {
 	@Size(min=8)
 	private String memberPassword;
 
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "roleEmail")
 	private Role memberRole;

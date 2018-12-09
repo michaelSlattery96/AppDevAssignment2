@@ -18,7 +18,7 @@ import com.example.demo.service.MemberService;
 public class AccountController {
 
 	@Autowired
-	MemberService memberServcie;
+	MemberService memberService;
 	
 	@Autowired
 	ProjectDao projectDao;
@@ -28,7 +28,7 @@ public class AccountController {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails user = (UserDetails) auth.getPrincipal();
-		Member member = memberServcie.findByEmail(user.getUsername());
+		Member member = memberService.findByEmail(user.getUsername());
 		
 		if (member == null) {
 			
