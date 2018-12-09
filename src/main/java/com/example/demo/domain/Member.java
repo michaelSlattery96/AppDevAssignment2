@@ -49,6 +49,10 @@ public class Member {
 	@OneToMany(mappedBy="creator", fetch=FetchType.EAGER, cascade= CascadeType.ALL)
 	private List<Project> projects = new ArrayList<Project>();
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="member", fetch=FetchType.LAZY, cascade= CascadeType.ALL)
+	private List<Pledge> pledge = new ArrayList<Pledge>();
+	
 	@Column(nullable=false)
 	private Boolean memberEnabled;
 
