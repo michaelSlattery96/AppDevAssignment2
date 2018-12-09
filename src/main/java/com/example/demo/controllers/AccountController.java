@@ -23,7 +23,7 @@ public class AccountController {
 	@Autowired
 	ProjectDao projectDao;
 	
-	@GetMapping("/profile")
+	@GetMapping("/showprofile")
 	public String showProjectsInProfile(Model model, Locale locale) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

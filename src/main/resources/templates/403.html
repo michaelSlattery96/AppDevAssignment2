@@ -16,7 +16,7 @@
 		   	<a th:href="@{/showprojects}" th:text="#{index.projects}">View all Projects</a>
 		   	<a th:if="${session.loggedin} != null" th:href="@{/newproject}" th:text="#{index.newproject}">Add New Project</a>
 		   	<a th:if="${session.loggedin} == null" th:href="@{/signup}" th:text="#{index.signup}">Sign Up</a>
-			<a th:if="${session.loggedin} != null" th:href="@{/profile}" th:text="#{index.profile}">Profile</a>
+			<a th:if="${session.loggedin} != null" th:href="@{/showprofile}" th:text="#{index.profile}">Profile</a>
 		   	<a th:if="${session.loggedin} != null" th:href="@{/logout}" id="loginbutton"><span th:text="#{index.logout}"></span></a>
 	    	<a th:if="${session.loggedin} == null" th:href="@{/login}"  id="loginbutton"><span th:text="#{index.login}"></span></a>
 	    </nav>
