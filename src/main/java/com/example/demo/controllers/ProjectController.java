@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.dao.PledgeDao;
 import com.example.demo.dao.ProjectDao;
 import com.example.demo.domain.Member;
+import com.example.demo.domain.Pledge;
 import com.example.demo.domain.Project;
 import com.example.demo.service.MemberService;
 
@@ -33,6 +35,9 @@ public class ProjectController {
 
 	@Autowired
 	ProjectDao projectDao;
+	
+	@Autowired
+	PledgeDao pledgeDao;
 	
 	@GetMapping("/showprojects")
 	public String showProjects(Model model, Locale locale) {
@@ -68,6 +73,17 @@ public class ProjectController {
 		return "editproject";
 	}
 	
+	@Transactional
+	@PutMapping("/projectdetails/{id}")
+	public String editAProjectSave(@Valid Project project, @PathVariable(name="id") int id, Model model, Locale locale) {
+		
+		projectDao.updateProjectDescription(project.getProjectDescription(), id);
+		
+		model.addAttribute("project", projectDao.findById(id).get());
+		
+		return "projectdetails";
+	}
+	
 	int oldCurrentValue;
 	
 	@GetMapping("/pledge/{projectid}")
@@ -85,6 +101,7 @@ public class ProjectController {
 		oldCurrentValue = project.getCurrentAmount();
 		
 		model.addAttribute("project", project);
+		model.addAttribute("pledges", pledgeDao.findAll());
 		
 		if (project.getCreator().getMemberEmail() == member.getMemberEmail()) {
 			return "pledgeowner";
@@ -95,22 +112,22 @@ public class ProjectController {
 	
 	@Transactional
 	@PutMapping("/pledge/{projectid}")
-	public String editCurrentPledgeSave(@Valid Project project, @PathVariable(name="projectid") int projectid, Model model, Locale locale) {
+	public String editCurrentPledgeSave(@Valid Project project, @PathVariable(name="projectid") int projectid,
+										Model model, Locale locale) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails user = (UserDetails) auth.getPrincipal();
+		Member member = memberServcie.findByEmail(user.getUsername());
 
 		projectDao.updateProjectCurrentAmount(project.getCurrentAmount() + oldCurrentValue, projectid);
 		
+		Pledge newPledge = new Pledge();
+		newPledge.setMember(member);
+		newPledge.setProject(projectDao.findById(projectid).get());
+		
+		pledgeDao.save(newPledge);
+		
 		model.addAttribute("project", projectDao.findById(projectid).get());
-		
-		return "projectdetails";
-	}
-	
-	@Transactional
-	@PutMapping("/projectdetails/{id}")
-	public String editAProjectSave(@Valid Project project, @PathVariable(name="id") int id, Model model, Locale locale) {
-		
-		projectDao.updateProjectDescription(project.getProjectDescription(), id);
-		
-		model.addAttribute("project", projectDao.findById(id).get());
 		
 		return "projectdetails";
 	}
@@ -124,7 +141,7 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/newproject")
-	public String addNewProjectSave(@Valid Project project, BindingResult binding, RedirectAttributes redirectAttributes) {
+	public String addNewProjectSave(@Valid Project project, @Valid Pledge pledge, BindingResult binding, RedirectAttributes redirectAttributes) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails user = (UserDetails) auth.getPrincipal();
