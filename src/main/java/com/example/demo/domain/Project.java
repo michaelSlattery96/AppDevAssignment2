@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Project {
 
@@ -37,6 +39,7 @@ public class Project {
 	@Column(nullable=false)
 	private LocalDate dateCreated;
 	
+	@JsonIgnore
 	@ManyToOne( fetch=FetchType.EAGER)
     @JoinColumn(nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

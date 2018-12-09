@@ -20,6 +20,6 @@ public class RestControllersProjects {
 	@GetMapping("projects")
 	List<Project> myRestProjects() {
 		
-		return projectDao.findAll();
+		return projectDao.findAllByOrderByProjectNameAsc();
 	}
 }
