@@ -68,25 +68,38 @@ public class ProjectController {
 		return "editproject";
 	}
 	
-	@GetMapping("/pledge/{id}")
-	public String editCurrentPledge(@PathVariable(name="id") int id, Model model, Locale locale) {
-		Project project = projectDao.findById(id).get();
+	int oldCurrentValue;
+	
+	@GetMapping("/pledge/{projectid}")
+	public String editCurrentPledge(@PathVariable(name="projectid") int projectid, Model model, Locale locale) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails user = (UserDetails) auth.getPrincipal();
+		Member member = memberServcie.findByEmail(user.getUsername());
+		
+		Project project = projectDao.findById(projectid).get();
 		if (project == null) {
-			
-			model.addAttribute("id", id);
+			model.addAttribute("id", projectid);
 			return "notFoundError";
 		}
+		
+		oldCurrentValue = project.getCurrentAmount();
+		
 		model.addAttribute("project", project);
-		return "pledge";
+		
+		if (project.getCreator().getMemberEmail() == member.getMemberEmail()) {
+			return "pledgeowner";
+		}
+		
+		return "pledgenotowner";
 	}
 	
 	@Transactional
-	@PutMapping("/pledge/{id}")
-	public String editCurrentPledgeSave(@Valid Project project, @PathVariable(name="id") int id, Model model, Locale locale) {
+	@PutMapping("/pledge/{projectid}")
+	public String editCurrentPledgeSave(@Valid Project project, @PathVariable(name="projectid") int projectid, Model model, Locale locale) {
+
+		projectDao.updateProjectCurrentAmount(project.getCurrentAmount() + oldCurrentValue, projectid);
 		
-		projectDao.updateProjectCurrentAmount(project.getCurrentAmount(), id);
-		
-		model.addAttribute("project", projectDao.findById(id).get());
+		model.addAttribute("project", projectDao.findById(projectid).get());
 		
 		return "projectdetails";
 	}

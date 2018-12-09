@@ -1,7 +1,10 @@
 package com.example.demo.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.OnDelete;
@@ -44,6 +48,10 @@ public class Project {
     @JoinColumn(nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
 	private Member creator;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="project", fetch=FetchType.EAGER, cascade= CascadeType.ALL)
+	private List<Pledge> pledges = new ArrayList<Pledge>();
 	
 	public Project(String projectName, String projectDescription, int targetAmount, int currentAmount,
 			LocalDate dateCreated, Member creator) {
@@ -94,6 +102,14 @@ public class Project {
 
 	public void setCurrentAmount(int currentAmount) {
 		this.currentAmount = currentAmount;
+	}
+	
+	public List<Pledge> getPledge() {
+		return pledges;
+	}
+
+	public void setPledge(List<Pledge> pledges) {
+		this.pledges = pledges;
 	}
 
 	public LocalDate getDateCreated() {
